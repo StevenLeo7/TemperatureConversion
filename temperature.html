@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <span class="col-sm-4"></span>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="inputPertama" style="text-transform:capitalize" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 47">
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <span class="col-sm-4"></span>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="result" style="text-transform:capitalize" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 47" disabled>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <span class="col-sm-4"></span>
+                <div class="col-sm-4">
+                    <select type="text" class="form-control rtf-input" id="inputFrom" data-size="5" data-dropup-auto="false">
+                        <option selected>From</option>
+                        <option value="Celcius">Celcius (C)</option>
+                        <option value="Fahrenheit">Fahrenheit (F)</option>
+                        <option value="Kelvin">Kelvin (K)</option>
+                        <option value="Rankine">Rankine (R)</option>
+                    </select>
+                </div>
+    
+                <span class="col-sm-4"></span>
+                <div class="col-sm-4">
+                    <select type="text" class="form-control rtf-input" id="inputTo" data-size="5" data-dropup-auto="false">
+                        <option selected>To</option>
+                        <option value="Celcius">Celcius (C)</option>
+                        <option value="Fahrenheit">Fahrenheit (F)</option>
+                        <option value="Kelvin">Kelvin (K)</option>
+                        <option value="Rankine">Rankine (R)</option>
+                    </select>
+                </div>    
+            </div>
+    
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="btnCalculate"> Calculate</button>
+            </div>
+    
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function(){
+        
+        $('#btnCalculate').off('click').on('click', convert);
+
+    });
+
+        function convert()
+        {
+            var pertama = $("#inputPertama").val();
+
+            if($('#inputFrom').val() == 'Celcius' && $('#inputTo').val() == 'Celcius')
+            {
+                result = pertama;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Celcius' && $('#inputTo').val() == 'Fahrenheit')
+            {
+                result = (pertama * 9/5) + 32;
+                $('#result').val(result)
+            }
+            else if($('#inputFrom').val() == 'Celcius' && $('#inputTo').val() == 'Kelvin')
+            {
+                result = (pertama * 1) + 273.15;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Celcius' && $('#inputTo').val() == 'Rankine')
+            {
+                result = pertama * 9/5 + 491.67;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Fahrenheit' && $('#inputTo').val() == 'Celcius')
+            {
+                result = ((pertama - 32 ) * 5/9);
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Fahrenheit' && $('#inputTo').val() == 'Fahrenheit')
+            {
+                result = pertama;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Fahrenheit' && $('#inputTo').val() == 'Kelvin')
+            {
+                result = (pertama - 32) * 5/9 + 273.15;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Fahrenheit' && $('#inputTo').val() == 'Rankine')
+            {
+                result = (pertama * 1) + 459.67;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Kelvin' && $('#inputTo').val() == 'Celcius')
+            {
+                result = (pertama * 1) - 273.15;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Kelvin' && $('#inputTo').val() == 'Fahrenheit')
+            {
+                result = ((pertama - 273.15) * 9/5 + 32);
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Kelvin' && $('#inputTo').val() == 'Kelvin')
+            {
+                result = pertama;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Kelvin' && $('#inputTo').val() == 'Rankine')
+            {
+                result = pertama * 1.8;
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Rankine' && $('#inputTo').val() == 'Celcius')
+            {
+                result = ((pertama - 491.67) * 5/9);
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Rankine' && $('#inputTo').val() == 'Fahrenheit')
+            {
+                result = (pertama - 459.67);
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Rankine' && $('#inputTo').val() == 'Kelvin')
+            {
+                result = (pertama * 5/9);
+                $("#result").val(result);
+            }
+            else if($('#inputFrom').val() == 'Rankine' && $('#inputTo').val() == 'Rankine')
+            {
+                result = pertama;
+                $("#result").val(result);
+            }
+        }
+</script>
+
+</html>
